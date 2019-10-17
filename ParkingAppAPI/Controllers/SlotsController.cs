@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ParkingAppAPI.Models;
@@ -20,10 +21,12 @@ namespace ParkingAppAPI.Controllers
         }
 
         // GET: api/Slots
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Slot>>> Getslots()
+        [HttpGet(Name = "GetSlots")]
+        public ActionResult<IEnumerable<Slot>> Getslots()
         {
-            return await _context.slots.ToListAsync();
+            var returnList = _context.slots.ToList();
+            returnList.Sort();
+            return Ok(returnList);
         }
 
         // POST: api/Slots
@@ -33,12 +36,24 @@ namespace ParkingAppAPI.Controllers
             _context.slots.Add(slot);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSlot", new { id = slot.Id }, slot);
+            return CreatedAtAction("GetSlots", new { id = slot.Id }, slot);
         }
 
-        private bool SlotExists(Guid id)
+        // PUT: api/Slots/0/0
+        [HttpPatch("{posX}/{posY}")]
+        public ActionResult UpdateSlot(int posX, int posY)
         {
-            return _context.slots.Any(e => e.Id == id);
+
+
+                var result = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
+
+                if (result != null)
+                {
+                    if (result.IsOccupied) result.IsOccupied = false;
+                    else result.IsOccupied = true;
+                    _context.SaveChanges();
+                }
+                return NoContent();
         }
     }
 }

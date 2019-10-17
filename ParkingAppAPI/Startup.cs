@@ -20,8 +20,8 @@ namespace ParkingAppAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SlotContext>(opt =>
-                opt.UseInMemoryDatabase("Parking"));
+            services.AddDbContextPool<SlotContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("SlotDb"))); // @"Server=(localdb)\mssqllocaldb;Database=SlotDb;Trusted_Connection=True;"
             services.AddControllers();
         }
 
