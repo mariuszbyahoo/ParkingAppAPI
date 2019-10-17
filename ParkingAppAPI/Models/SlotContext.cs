@@ -17,8 +17,11 @@ namespace ParkingAppAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-                modelBuilder.Entity<Slot>().HasData(
-                    new Slot()) ;
+            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 1, IsOccupied = true});
+            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 2, IsOccupied = false });
+            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 3, IsOccupied = true });
+            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 4, IsOccupied = false });
+
         }
     }
 }
