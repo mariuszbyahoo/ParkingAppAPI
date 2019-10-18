@@ -43,18 +43,30 @@ namespace ParkingAppAPI.Controllers
         // PUT: api/Slots/0/0
         [HttpPatch("{posX}/{posY}")]
         public ActionResult UpdateSlot(int posX, int posY)
-        {
-            var response = _context.ticketFactory.GenerateTicket(posX, posY);
+        { 
+            var result = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
 
-                var result = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
+            if (result.IsOccupied)
+            {
+                result.IsOccupied = false;
+                _context.SaveChanges();
+                return Ok("Have a nice day!");
+            }
+            else
+            {
+                var response = _context.ticketFactory.GenerateTicket(posX, posY);
 
                 if (result != null)
                 {
-                    if (result.IsOccupied) result.IsOccupied = false;
-                    else result.IsOccupied = true;
+                    result.IsOccupied = true;
                     _context.SaveChanges();
                 }
+                else
+                {
+                    return NotFound("There is not such a slot like this. Select another one.");
+                }
                 return Ok(response);
+            }
         }
     }
 }
