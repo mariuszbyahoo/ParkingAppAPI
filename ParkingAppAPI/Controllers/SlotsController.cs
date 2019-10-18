@@ -34,6 +34,7 @@ namespace ParkingAppAPI.Controllers
         public async Task<ActionResult<Slot>> PostSlot(Slot slot)
         {
             _context.slots.Add(slot);
+            
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetSlots", new { id = slot.Id }, slot);
@@ -43,7 +44,7 @@ namespace ParkingAppAPI.Controllers
         [HttpPatch("{posX}/{posY}")]
         public ActionResult UpdateSlot(int posX, int posY)
         {
-
+            var response = _context.ticketFactory.GenerateTicket(posX, posY);
 
                 var result = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
 
@@ -53,7 +54,7 @@ namespace ParkingAppAPI.Controllers
                     else result.IsOccupied = true;
                     _context.SaveChanges();
                 }
-                return NoContent();
+                return Ok(response);
         }
     }
 }

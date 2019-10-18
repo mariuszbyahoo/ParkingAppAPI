@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ParkingAppAPI.Ticket;
 
 namespace ParkingAppAPI.Models
 {
     public class SlotContext : DbContext
     {
+        public ITicketFactory ticketFactory;
         public DbSet<Slot> slots { get; set; }
         public SlotContext(DbContextOptions<SlotContext> options) : base(options)
         {
-
+            ticketFactory = new TicketFactory(this);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
