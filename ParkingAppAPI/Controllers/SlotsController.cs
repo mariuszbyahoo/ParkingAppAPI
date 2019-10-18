@@ -68,5 +68,18 @@ namespace ParkingAppAPI.Controllers
                 return Ok(response);
             }
         }
+
+        [HttpDelete("{posX}/{posY}")]
+        public ActionResult DeleteSlot(int posX, int posY)
+        {
+            var slot = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
+
+            if (slot == null) return NotFound();
+
+            _context.slots.Remove(slot);
+            _context.SaveChanges();
+
+            return Ok($"Succesfully deleted a slot: X = {posX} Y = {posY}");
+        }
     }
 }
