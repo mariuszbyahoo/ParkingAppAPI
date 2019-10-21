@@ -47,7 +47,7 @@ namespace ParkingApp.API.Controllers
         [HttpPatch("{posX}/{posY}")]
         public ActionResult UpdateSlot(int posX, int posY)
         { 
-            var result = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
+            var result = _context.slots.FirstOrDefault(s => s.posX == posX && s.posY == posY);
 
             if (result != null)
             {
@@ -82,7 +82,7 @@ namespace ParkingApp.API.Controllers
         [HttpDelete("{posX}/{posY}")]
         public ActionResult DeleteSlot(int posX, int posY)
         {
-            var slot = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
+            var slot = _context.slots.FirstOrDefault(s => s.posX == posX && s.posY == posY);
 
             if (slot == null) return NotFound();
 

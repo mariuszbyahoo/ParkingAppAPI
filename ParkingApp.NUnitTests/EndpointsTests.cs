@@ -4,6 +4,7 @@ using iText.Layout.Element;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using RestSharp;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -16,86 +17,86 @@ namespace ParkingApp.NUnitTests
     {
         private WebApplicationFactory<ParkingApp.API.Startup> _factory;
         string baseUrl;
+        string itemUrl;
         int x;
         int y;
-        HttpClient client;
+        RestClient _client;
+        RestRequest _request;
 
         [SetUp]
         public void Setup()
         {
-            x = 0;
-            y = 0;
+            x = 999;
+            y = 999;
             this._factory = new WebApplicationFactory<ParkingApp.API.Startup>();
             this.baseUrl = "http://localhost:5000/api/Slots";
-            client = _factory.CreateClient();
-
-        }
-
-        [Test]
-        public void GetRequestReturnsOkWhenCalled()
-        {
-            // Arrange
-            
-            
-            // Act
-
-            var response = client.GetAsync(baseUrl);
-
-            // Assert
-            Assert.AreEqual(HttpStatusCode.OK, response.Result.StatusCode);
-        }
-
-        [Test]
-        public void Post_EndpointReturnsCreatedAtActionWhenUnoccupiedCoordinatesSelected()
-        {
-            // Arrange
-            var jsonText = generateJsonSlot(x, y);
-
-            // Act
-            using (var client = _factory.CreateClient())
-            {
-                var httpContent = new StringContent(jsonText);
-                httpContent.Headers.ContentType =
-                    new MediaTypeHeaderValue("application/json");
-
-                var response = client.PostAsync(baseUrl, httpContent);
-
-                // Assert
-                Assert.AreEqual(HttpStatusCode.Created, response.Result.StatusCode);
-            }
-        }
-
-        [Test]
-        public void Patch_EndpointReturnsOkWhencalled()
-        {
-            // Arrange
-            HttpStatusCode response;
-            var patchUrl = $"{baseUrl}/{x}/{y}";
-
-            // Act
-            response = client.PatchAsync(patchUrl, null).Result.StatusCode;
-            //client.PatchAsync(url, null);
-
-            // Assert
-            Assert.AreEqual(HttpStatusCode.OK, response);
+            this.itemUrl = $"http://localhost:5000/api/Slots/{x}/{y}";
         }
 
         [Test]
         public void Delete_EndpointReturnsOkWhenCalledByCoordinates()
         {
             // Arrange
-            var deleteUrl = $"{baseUrl}/{x}/{y}";
-
+            var prepare = StatusAfterCreateAndPostSlot();       //*********************** PLUS JEDEN
             // Act
-            var response = client.DeleteAsync(deleteUrl);
+            var response = StatusAfterDeleteSlot();             //*********************** MINUS JEDEN
 
             // Assert
-            Assert.AreEqual(HttpStatusCode.OK, response.Result.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response);
         }
 
-        // Helpers below:
+        //          DWA DODAJE JEDNO ODEJMUJE RAZEM ZOSTAJE JEDNO
 
-        private string generateJsonSlot(int x, int y)
+        [Test]
+        public void GetRequestReturnsOkWhenCalled()
+        {
+            // Arrange
+            this._client = new RestClient(baseUrl);
+            _request = new RestRequest(Method.GET);
+
+            // Act
+            var response = _client.Execute(_request);
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        //          NIC NIE MODYFIKUJE
+
+        [Test]
+        public void Patch_EndpointReturnsOkWhencalled()
+        {
+            // Arrange
+            StatusAfterCreateAndPostSlot();     //*********************** PLUS JEDEN
+            this._client = new RestClient(itemUrl);
+            _request = new RestRequest(Method.PATCH);
+
+            // Act
+            var response = _client.Execute(_request);
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+
+
+        [Test]
+        public void Post_EndpointReturnsCreatedAtActionWhenUnoccupiedCoordinatesSelected()
+        {
+            // Arrange
+            StatusAfterDeleteSlot();            //*********************** MINUS JEDEN
+
+            // Act
+            var response = StatusAfterCreateAndPostSlot();//*********************** PLUS JEDEN
+            StatusAfterDeleteSlot();            //*********************** MINUS JEDEN
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.Created, response);
+        }
+
+        
+        //*******************************************Helpers below:***********************************************************
+
+        private JObject GenerateJObject()
         {
             JObject jObject =
                 new JObject(
@@ -103,7 +104,26 @@ namespace ParkingApp.NUnitTests
                     new JProperty("posY", y),
                     new JProperty("IsOccupied", false));
 
-            return jObject.ToString();
+            return jObject;
+        }
+
+        private HttpStatusCode StatusAfterCreateAndPostSlot()
+        {
+            _client = new RestClient(baseUrl);
+            _request = new RestRequest(Method.POST);
+            _request.AddParameter(
+                "application/json", GenerateJObject(), 
+                ParameterType.RequestBody);
+
+            return _client.Execute(_request).StatusCode;
+
+        }
+
+        private HttpStatusCode StatusAfterDeleteSlot()
+        {
+            _client = new RestClient(itemUrl);
+            _request = new RestRequest(Method.DELETE);
+            return _client.Execute(_request).StatusCode;
         }
     }
 }

@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingApp.API", "ParkingAppAPI\ParkingApp.API.csproj", "{7CC74101-34C7-401B-8727-19D17A894D39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingApp.Tests", "ParkingApp.Tests\ParkingApp.Tests.csproj", "{511CEB34-E459-4987-BBD1-4A3612527024}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingApp.NUnitTests", "ParkingApp.NUnitTests\ParkingApp.NUnitTests.csproj", "{CE8130F2-A682-4F5E-ABA9-AFE093266472}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingApp.NUnitTests", "ParkingApp.NUnitTests\ParkingApp.NUnitTests.csproj", "{CE8130F2-A682-4F5E-ABA9-AFE093266472}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{7CC74101-34C7-401B-8727-19D17A894D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CC74101-34C7-401B-8727-19D17A894D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CC74101-34C7-401B-8727-19D17A894D39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{511CEB34-E459-4987-BBD1-4A3612527024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{511CEB34-E459-4987-BBD1-4A3612527024}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{511CEB34-E459-4987-BBD1-4A3612527024}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{511CEB34-E459-4987-BBD1-4A3612527024}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE8130F2-A682-4F5E-ABA9-AFE093266472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE8130F2-A682-4F5E-ABA9-AFE093266472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE8130F2-A682-4F5E-ABA9-AFE093266472}.Release|Any CPU.ActiveCfg = Release|Any CPU
