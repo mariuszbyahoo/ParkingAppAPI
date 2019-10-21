@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ParkingAppAPI.Ticket
+namespace ParkingApp.API.Ticket
 {
     public interface ITicketFactory
     {

@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ParkingAppAPI.Models;
-using ParkingAppAPI.Ticket;
+using ParkingApp.API.Models;
+using ParkingApp.API.Ticket;
 
-namespace ParkingAppAPI
+namespace ParkingApp.API
 {
     public class Startup
     {

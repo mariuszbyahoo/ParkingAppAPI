@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ParkingAppAPI.Models;
+using ParkingApp.API.Models;
 
-namespace ParkingAppAPI.Migrations
+namespace ParkingApp.API.Migrations
 {
     [DbContext(typeof(SlotContext))]
     partial class SlotContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace ParkingAppAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ParkingAppAPI.Slot", b =>
+            modelBuilder.Entity("ParkingApp.API.Slot", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,35 +41,35 @@ namespace ParkingAppAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("894a69be-592f-42bf-b01f-813fe991a916"),
+                            Id = new Guid("2a6964b5-12f5-45c4-9b51-c619642815cd"),
                             IsOccupied = false,
                             posX = 0,
                             posY = 0
                         },
                         new
                         {
-                            Id = new Guid("5975e9c8-b086-4277-a5e7-23d9160b5625"),
+                            Id = new Guid("f31bf444-0966-4580-84cf-36823400e0de"),
                             IsOccupied = false,
                             posX = 0,
                             posY = 1
                         },
                         new
                         {
-                            Id = new Guid("5fc199eb-b015-4203-ae99-022d47ebfa34"),
+                            Id = new Guid("d84ed0c3-8fe5-4b0a-ad71-f4551830ccbf"),
                             IsOccupied = false,
                             posX = 0,
                             posY = 2
                         },
                         new
                         {
-                            Id = new Guid("4afb706a-1d15-4d4c-b8e8-0f5a6a255235"),
+                            Id = new Guid("38693933-1c78-4a65-9e46-06cc258a4194"),
                             IsOccupied = false,
                             posX = 0,
                             posY = 3
                         },
                         new
                         {
-                            Id = new Guid("0a1682d7-cab4-4aa9-8281-3adeeccc6e1a"),
+                            Id = new Guid("a89afa90-88c2-440d-a84e-bbce6d8a203a"),
                             IsOccupied = false,
                             posX = 0,
                             posY = 4

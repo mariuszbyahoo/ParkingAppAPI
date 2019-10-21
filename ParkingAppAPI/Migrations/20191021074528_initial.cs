@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ParkingAppAPI.Migrations
+namespace ParkingApp.API.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,10 +26,11 @@ namespace ParkingAppAPI.Migrations
                 columns: new[] { "Id", "IsOccupied", "posX", "posY" },
                 values: new object[,]
                 {
-                    { new Guid("f4f2801b-9c02-42ab-9c79-d1e0e6833d3b"), true, 0, 1 },
-                    { new Guid("fde8d12a-1d6e-43eb-8a00-7bdda7c8c84b"), false, 0, 2 },
-                    { new Guid("cc823fca-9054-4cd2-828a-40348834ec6e"), true, 0, 3 },
-                    { new Guid("c37e227b-7487-427a-8dc5-004d8ac45352"), false, 0, 4 }
+                    { new Guid("2a6964b5-12f5-45c4-9b51-c619642815cd"), false, 0, 0 },
+                    { new Guid("f31bf444-0966-4580-84cf-36823400e0de"), false, 0, 1 },
+                    { new Guid("d84ed0c3-8fe5-4b0a-ad71-f4551830ccbf"), false, 0, 2 },
+                    { new Guid("38693933-1c78-4a65-9e46-06cc258a4194"), false, 0, 3 },
+                    { new Guid("a89afa90-88c2-440d-a84e-bbce6d8a203a"), false, 0, 4 }
                 });
         }
 

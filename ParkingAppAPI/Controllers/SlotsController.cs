@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ParkingAppAPI.Models;
+using ParkingApp.API.Models;
 
-namespace ParkingAppAPI.Controllers
+namespace ParkingApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -33,6 +33,9 @@ namespace ParkingAppAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Slot>> PostSlot(Slot slot)
         {
+            if (_context.slots.Any(s => s.posX == slot.posX && s.posY == slot.posY))
+                return BadRequest("Such a slot exists!");
+
             _context.slots.Add(slot);
             
             await _context.SaveChangesAsync();
@@ -80,6 +83,19 @@ namespace ParkingAppAPI.Controllers
             _context.SaveChanges();
 
             return Ok($"Succesfully deleted a slot: X = {posX} Y = {posY}");
+        }
+
+        [HttpDelete("{guid}")]
+        public ActionResult DeleteSlot(Guid guid)
+        {
+            var slot = _context.slots.SingleOrDefault(s => s.Id == guid);
+
+            if (slot == null) return NotFound();
+
+            _context.slots.Remove(slot);
+            _context.SaveChanges();
+
+            return Ok($"Succesfully deleted a slot with an ID: {guid}");
         }
     }
 }

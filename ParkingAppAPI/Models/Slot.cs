@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ParkingAppAPI
+namespace ParkingApp.API
 {
     public class Slot : IComparable<Slot>
     {

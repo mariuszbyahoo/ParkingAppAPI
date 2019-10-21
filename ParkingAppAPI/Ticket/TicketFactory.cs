@@ -1,12 +1,12 @@
 ﻿using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
-using ParkingAppAPI.Models;
+using ParkingApp.API.Models;
 using System.IO;
 using System.Linq;
 
 
-namespace ParkingAppAPI.Ticket
+namespace ParkingApp.API.Ticket
 {
     public class TicketFactory : ITicketFactory
     {

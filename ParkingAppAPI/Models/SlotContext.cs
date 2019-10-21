@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ParkingAppAPI.Ticket;
+using ParkingApp.API.Ticket;
 
-namespace ParkingAppAPI.Models
+namespace ParkingApp.API.Models
 {
     public class SlotContext : DbContext
     {
