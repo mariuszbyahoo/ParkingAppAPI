@@ -15,7 +15,6 @@ namespace ParkingApp.NUnitTests
 {
     public class EndpointsTests
     {
-        private WebApplicationFactory<ParkingApp.API.Startup> _factory;
         string baseUrl;
         string itemUrl;
         int x;
@@ -28,7 +27,6 @@ namespace ParkingApp.NUnitTests
         {
             x = 999;
             y = 999;
-            this._factory = new WebApplicationFactory<ParkingApp.API.Startup>();
             this.baseUrl = "http://localhost:5000/api/Slots";
             this.itemUrl = $"http://localhost:5000/api/Slots/{x}/{y}";
         }
