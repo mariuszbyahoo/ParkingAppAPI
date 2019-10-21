@@ -49,26 +49,33 @@ namespace ParkingApp.API.Controllers
         { 
             var result = _context.slots.SingleOrDefault(s => s.posX == posX && s.posY == posY);
 
-            if (result.IsOccupied)
+            if (result != null)
             {
-                result.IsOccupied = false;
-                _context.SaveChanges();
-                return Ok("Have a nice day!");
-            }
-            else
-            {
-                var response = _context.ticketFactory.GenerateTicket(posX, posY);
-
-                if (result != null)
+                if (result.IsOccupied)
                 {
-                    result.IsOccupied = true;
+                    result.IsOccupied = false;
                     _context.SaveChanges();
+                    return Ok("Have a nice day!");
                 }
                 else
                 {
-                    return NotFound("There is not such a slot like this. Select another one.");
+                    var response = _context.ticketFactory.GenerateTicket(posX, posY);
+
+                    if (result != null)
+                    {
+                        result.IsOccupied = true;
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        return NotFound("There is not such a slot like this. Select another one.");
+                    }
+                    return Ok(response);
                 }
-                return Ok(response);
+            }
+            else
+            {
+                return NotFound("Such a slot doesn't exists!");
             }
         }
 

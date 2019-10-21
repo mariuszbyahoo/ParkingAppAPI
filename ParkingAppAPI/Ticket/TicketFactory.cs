@@ -19,11 +19,11 @@ namespace ParkingApp.API.Ticket
 
         public string GenerateTicket(int posX, int posY)
         {
-            var file = File.Create("../ticket.pdf");
-            PdfWriter writer = new PdfWriter(file, new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0));
-            PdfDocument pdfDocument = new PdfDocument(writer);
+            //var file = File.Create("../ticket.pdf");
+            var writer = new PdfWriter("../ticket.pdf");
+            var pdfDocument = new PdfDocument(writer);
             pdfDocument.SetTagged();
-            Document document = new Document(pdfDocument);
+            var document = new Document(pdfDocument);
             document.Add(new Paragraph("ParkingAppAPI!"));
             document.Add(new Paragraph("***************************"));
             document.Add(new Paragraph($"Your parking slot coords is: X = {posX} Y = {posY}"));
