@@ -1,29 +1,43 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.FileExtensions;
+using Microsoft.Extensions.Configuration.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Runtime.Serialization.Json;
+using System.Text;
 
 namespace ParkingApp.Tests
 {
     [TestFixture]
     public class EndpointsTests
     {
-        string baseUrl;
-        string itemUrl;
-        int x;
-        int y;
+        int x = 999;
+        int y = 999;
         RestClient _client;
         RestRequest _request;
+        string baseUrl;
+        string itemUrl;
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
-            x = 999;
-            y = 999;
-            this.baseUrl = "http://localhost:5000/api/Slots";
-            this.itemUrl = $"http://localhost:5000/api/Slots/{x}/{y}";
-        }
+            //var enumerableConfig = AppConfig.GetNetCoreConfig().AsEnumerable();
+            //var enumerator = enumerableConfig.GetEnumerator();
 
+            //baseUrl = enumerator.Current.Value;
+            //enumerator.MoveNext();
+            //itemUrl = enumerator.Current.Value;
+
+            baseUrl = AppConfig.GetNetCoreConfig().GetConnectionString("base");
+            itemUrl = AppConfig.GetNetCoreConfig().GetConnectionString("item");
+
+        }
         [Test]
         public void Delete_EndpointReturnsOkWhenCalledByCoordinates()
         {
@@ -41,9 +55,9 @@ namespace ParkingApp.Tests
             // Arrange
             StatusAfterCreateAndPostSlot();                             //*********************** PLUS JEDEN
             // Act
-            StatusAfterDeleteSlot();
+            StatusAfterDeleteSlot();                                    //*********************** MINUS JEDEN
             var response = StatusAfterDeleteSlot();                     //*********************** MINUS JEDEN
-                                                                        //*********************** MINUS JEDEN
+
 
             // Assert
             Assert.AreEqual(HttpStatusCode.NotFound, response);
