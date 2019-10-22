@@ -1,6 +1,5 @@
 {
-  "ConnectionStrings": {
+  "UrlStrings": {
     "base": "http://localhost:5000/api/Slots",
-    "item": "http://localhost:5000/api/Slots/999/999"
   }
 }

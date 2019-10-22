@@ -1,16 +1,7 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.FileExtensions;
-using Microsoft.Extensions.Configuration.Json;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net;
-using System.Runtime.Serialization.Json;
-using System.Text;
 
 namespace ParkingApp.Tests
 {
@@ -27,15 +18,9 @@ namespace ParkingApp.Tests
         [SetUp]
         public void SetUp()
         {
-            //var enumerableConfig = AppConfig.GetNetCoreConfig().AsEnumerable();
-            //var enumerator = enumerableConfig.GetEnumerator();
 
-            //baseUrl = enumerator.Current.Value;
-            //enumerator.MoveNext();
-            //itemUrl = enumerator.Current.Value;
-
-            baseUrl = AppConfig.GetNetCoreConfig().GetConnectionString("base");
-            itemUrl = AppConfig.GetNetCoreConfig().GetConnectionString("item");
+            baseUrl = AppConfig.GetNetCoreConfig().GetSection("UrlStrings")["base"];
+            itemUrl = $"{baseUrl}/{x}/{y}";
 
         }
         [Test]
