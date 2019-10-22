@@ -1,17 +1,9 @@
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using RestSharp;
-using System;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
-namespace ParkingApp.NUnitTests
+namespace ParkingApp.Tests
 {
     [TestFixture]
     public class EndpointsTests
@@ -36,12 +28,25 @@ namespace ParkingApp.NUnitTests
         public void Delete_EndpointReturnsOkWhenCalledByCoordinates()
         {
             // Arrange
-            var prepare = StatusAfterCreateAndPostSlot();       //*********************** PLUS JEDEN
+            StatusAfterCreateAndPostSlot();                             //*********************** PLUS JEDEN
             // Act
-            var response = StatusAfterDeleteSlot();             //*********************** MINUS JEDEN
+            var response = StatusAfterDeleteSlot();                     //*********************** MINUS JEDEN
 
             // Assert
             Assert.AreEqual(HttpStatusCode.OK, response);
+        }
+        [Test]
+        public void Delete_AfterCallingSecondCallReturnsNotFound()
+        {
+            // Arrange
+            StatusAfterCreateAndPostSlot();                             //*********************** PLUS JEDEN
+            // Act
+            StatusAfterDeleteSlot();
+            var response = StatusAfterDeleteSlot();                     //*********************** MINUS JEDEN
+                                                                        //*********************** MINUS JEDEN
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.NotFound, response);
         }
 
         [Test]
@@ -62,7 +67,7 @@ namespace ParkingApp.NUnitTests
         public void Patch_EndpointReturnsOkWhencalled()
         {
             // Arrange
-            StatusAfterCreateAndPostSlot();     //*********************** PLUS JEDEN
+            StatusAfterCreateAndPostSlot();                             //*********************** PLUS JEDEN
             this._client = new RestClient(itemUrl);
             _request = new RestRequest(Method.PATCH);
 
@@ -73,22 +78,34 @@ namespace ParkingApp.NUnitTests
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
 
-
         [Test]
         public void Post_EndpointReturnsCreatedAtActionWhenUnoccupiedCoordinatesSelected()
         {
             // Arrange
-            StatusAfterDeleteSlot();            //*********************** MINUS JEDEN
+            StatusAfterDeleteSlot();                                    //*********************** MINUS JEDEN
 
             // Act
-            var response = StatusAfterCreateAndPostSlot();//*********************** PLUS JEDEN
-            StatusAfterDeleteSlot();            //*********************** MINUS JEDEN
+            var response = StatusAfterCreateAndPostSlot();              //*********************** PLUS JEDEN
+            StatusAfterDeleteSlot();                                    //*********************** MINUS JEDEN
 
             // Assert
             Assert.AreEqual(HttpStatusCode.Created, response);
         }
 
-        
+        [Test]
+        public void Post_EndpointReturnsBadRequestAtActionWhenOccupiedCoordinatesSelected()
+        {
+            // Arrange
+
+            // Act
+            var response = StatusAfterCreateAndPostSlot();              //*********************** PLUS JEDEN
+            StatusAfterDeleteSlot();                                    //*********************** MINUS JEDEN
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.BadRequest, response);
+        }
+
+
         //*******************************************Helpers below:***********************************************************
 
         private JObject GenerateJObject()
