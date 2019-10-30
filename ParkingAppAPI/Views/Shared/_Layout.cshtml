@@ -6,21 +6,28 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" />
     <meta name="viewport" content="width=device-width" , initial-scale="1" />
+    <style>
+        .slot{
+            width: 250px;
+            height: 250px;
+            font-size: 0;
+        }
+    </style>
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <h1 class="header">Mój Turbo Parking!</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <p class="lead">
-                        <img class="img-fluid" alt="Mój turbo parking!" src="~/img/logo.jpg" />
-                    </p>
-                </div>
-                <div class="col-md-9">
-                    @RenderBody()
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">
+                    <img class="img-fluid" alt="Mój turbo parking!" src="~/img/logo.jpg" />
+                </p>
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

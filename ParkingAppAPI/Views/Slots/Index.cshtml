@@ -1,12 +1,15 @@
 ﻿@model SlotsListViewModel
 
 <h1 class="font-italic">Choose your parking slot:</h1>
-@foreach (var slot in Model.Slots)
-{
-    <div class="col-sm-4 col-lg-4 col-md-4">
-         <div class="thumbnail">
-            <h4 id="slotStatus">@slot.IsOccupied</h4>
-            <p class="text-light" id="slotId">@slot.Id</p>
-         </div>
+<p> We've got: @Model.Slots.Count() slots</p>
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="row">
+        @foreach (var slot in Model.Slots)
+        {
+            <button class="slot" onclick="changeColor()">@slot.IsOccupied</button>
+        }
     </div>
-}
+</div>
+<script src="~/script.js"></script>
+
