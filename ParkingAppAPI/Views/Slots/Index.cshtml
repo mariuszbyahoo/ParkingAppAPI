@@ -1,11 +1,12 @@
 ﻿@model SlotsListViewModel
 
+<h1 class="font-italic">Choose your parking slot:</h1>
 @foreach (var slot in Model.Slots)
 {
-    <div>
-        <h2>Parking Tile</h2>
-        <h4 class="status">@slot.IsOccupied</h4>
-        <h1 class="position">X: @slot.PosX | Y: @slot.PosY</h1>
-        <p class="unimprotant">@slot.Id</p>
+    <div class="col-sm-4 col-lg-4 col-md-4">
+         <div class="thumbnail">
+            <h4 id="slotStatus">@slot.IsOccupied</h4>
+            <p class="text-light" id="slotId">@slot.Id</p>
+         </div>
     </div>
 }
