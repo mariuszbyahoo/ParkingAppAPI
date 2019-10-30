@@ -10,7 +10,7 @@ namespace ParkingApp.API.Models
     public class SlotContext : DbContext
     {
         public ITicketFactory ticketFactory;
-        public DbSet<Slot> slots { get; set; }
+        public DbSet<Slot> Slots { get; set; }
         public SlotContext(DbContextOptions<SlotContext> options) : base(options)
         {
             ticketFactory = new TicketFactory(this);
@@ -18,7 +18,7 @@ namespace ParkingApp.API.Models
 
         public IEnumerable<Slot> AllSlots()
         {
-            var list = slots.ToListAsync().Result;
+            var list = Slots.ToListAsync().Result;
             return list;
         }
     }

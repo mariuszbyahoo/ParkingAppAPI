@@ -50,10 +50,10 @@ namespace ParkingApp.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Slot>> PostSlot(Slot slot)
         {
-            if (_context.slots.Any(s => s.posX == slot.posX && s.posY == slot.posY))
+            if (_context.Slots.Any(s => s.PosX == slot.PosX && s.PosY == slot.PosY))
                 return BadRequest("Such a slot exists!");
 
-            _context.slots.Add(slot);
+            _context.Slots.Add(slot);
             
             await _context.SaveChangesAsync();
 
@@ -64,7 +64,7 @@ namespace ParkingApp.API.Controllers
         [HttpPatch("{posX}/{posY}")]
         public ActionResult UpdateSlot(int posX, int posY)
         { 
-            var result = _context.slots.FirstOrDefault(s => s.posX == posX && s.posY == posY);
+            var result = _context.Slots.FirstOrDefault(s => s.PosX == posX && s.PosY == posY);
 
             if (result != null)
             {
@@ -99,11 +99,11 @@ namespace ParkingApp.API.Controllers
         [HttpDelete("{posX}/{posY}")]
         public ActionResult DeleteSlot(int posX, int posY)
         {
-            var slot = _context.slots.FirstOrDefault(s => s.posX == posX && s.posY == posY);
+            var slot = _context.Slots.FirstOrDefault(s => s.PosX == posX && s.PosY == posY);
 
             if (slot == null) return NotFound();
 
-            _context.slots.Remove(slot);
+            _context.Slots.Remove(slot);
             _context.SaveChanges();
 
             return Ok($"Succesfully deleted a slot: X = {posX} Y = {posY}");
@@ -112,11 +112,11 @@ namespace ParkingApp.API.Controllers
         [HttpDelete("{guid}")]
         public ActionResult DeleteSlot(Guid guid)
         {
-            var slot = _context.slots.SingleOrDefault(s => s.Id == guid);
+            var slot = _context.Slots.SingleOrDefault(s => s.Id == guid);
 
             if (slot == null) return NotFound();
 
-            _context.slots.Remove(slot);
+            _context.Slots.Remove(slot);
             _context.SaveChanges();
 
             return Ok($"Succesfully deleted a slot with an ID: {guid}");

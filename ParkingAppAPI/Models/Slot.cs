@@ -7,15 +7,15 @@ namespace ParkingApp.API
     public class Slot : IComparable<Slot>
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public int posX { get; set; }
-        public int posY { get; set; }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
         public bool IsOccupied { get; set; }
 
         public int CompareTo( Slot other)
         {
-            var comparisonResult = posY.CompareTo(other.posY);
+            var comparisonResult = PosY.CompareTo(other.PosY);
             if (comparisonResult == 0)
-                posX.CompareTo(other.posX);
+                PosX.CompareTo(other.PosX);
 
            return comparisonResult;
         }
