@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ParkingApp.API.Models;
+using ParkingApp.API.ViewModel;
 
 namespace ParkingApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SlotsController : ControllerBase
+    public class SlotsController : Controller
     {
         private readonly SlotContext _context;
 
@@ -20,14 +21,30 @@ namespace ParkingApp.API.Controllers
             _context = context;
         }
 
-        // GET: api/Slots
-        [HttpGet(Name = "GetSlots")]
-        public ActionResult<IEnumerable<Slot>> Getslots()
+        /// <summary>
+        /// GET: api/Slots
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(Name = "Gui")]
+        public ViewResult Index()
         {
-            var returnList = _context.slots.ToList();
-            returnList.Sort();
-            return Ok(returnList);
+            var slotsListViewModel = new SlotsListViewModel()
+            {
+                Slots = _context.AllSlots()
+            };
+
+            return View(slotsListViewModel);
         }
+
+        //// GET: api/Slots
+        //[Route("raw")]
+        //[HttpGet(Name = "GetSlots")]
+        //public ActionResult<IEnumerable<Slot>> Getslots()
+        //{
+        //    var returnList = _context.slots.ToList();
+        //    returnList.Sort();
+        //    return Ok(returnList);
+        //}
 
         // POST: api/Slots
         [HttpPost]

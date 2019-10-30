@@ -23,7 +23,7 @@ namespace ParkingApp.API
         {
             services.AddDbContextPool<SlotContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("SlotDb"))); // @"Server=(localdb)\mssqllocaldb;Database=SlotDb;Trusted_Connection=True;"
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +40,9 @@ namespace ParkingApp.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }

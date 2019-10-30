@@ -1,0 +1,21 @@
+﻿@model ParkingApp.API.ViewModel.SlotsListViewModel
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width", initial-scale="1" />
+</head>
+<body>
+    <h1 class="header">Mój Turbo Parking!</h1>
+    @foreach (var slot in Model.Slots)
+    {
+        <div>
+            <h2>Parking Tile</h2>
+            <h4 class="status">@slot.IsOccupied</h4>
+            <h1 class="position">X: @slot.posX | Y: @slot.posY</h1>
+            <p class="unimprotant">@slot.Id</p>
+        </div>
+    }
+</body>
+</html>

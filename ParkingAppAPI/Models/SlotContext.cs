@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ParkingApp.API.Ticket;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ParkingApp.API.Models
 {
@@ -12,13 +16,10 @@ namespace ParkingApp.API.Models
             ticketFactory = new TicketFactory(this);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public IEnumerable<Slot> AllSlots()
         {
-            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 0, IsOccupied = false });
-            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 1, IsOccupied = false});
-            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 2, IsOccupied = false });
-            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 3, IsOccupied = false });
-            modelBuilder.Entity<Slot>().HasData(new Slot() { posX = 0, posY = 4, IsOccupied = false });
+            var list = slots.ToListAsync().Result;
+            return list;
         }
     }
 }

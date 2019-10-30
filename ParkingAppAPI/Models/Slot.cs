@@ -13,7 +13,11 @@ namespace ParkingApp.API
 
         public int CompareTo( Slot other)
         {
-           return posY.CompareTo(other.posY);
+            var comparisonResult = posY.CompareTo(other.posY);
+            if (comparisonResult == 0)
+                posX.CompareTo(other.posX);
+
+           return comparisonResult;
         }
     }
 }

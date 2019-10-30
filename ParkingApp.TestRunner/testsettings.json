@@ -1,5 +1,5 @@
 {
   "UrlStrings": {
-    "base": "http://localhost:5000/api/Slots",
+    "base": "http://localhost:5000/api/Slots"
   }
 }
