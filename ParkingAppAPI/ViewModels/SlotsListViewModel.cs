@@ -7,6 +7,6 @@ namespace ParkingApp.API.ViewModel
 {
     public class SlotsListViewModel
     {
-        public IEnumerable<Slot> Slots { get; set; }
+        public IEnumerable<Slot> Slots { get; set; } 
     }
 }

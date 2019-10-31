@@ -63,20 +63,18 @@ namespace ParkingApp.API.Controllers
         public ActionResult UpdateSlot(Guid guid)
         {
             var result = _context.Slots.FirstOrDefault(s => s.Id == guid);
-            string response;
             if (result != null)
             {
                 if (result.IsOccupied)
                 {
                     result.IsOccupied = false;
                     _context.SaveChanges();
-                    return Ok("Have a nice day!");
+                    return Ok(result.Id);
                 }
                 else
                 {
                     if (result != null)
                     {
-                        response = _context.ticketFactory.GenerateTicket(guid);
                         result.IsOccupied = true;
                         _context.SaveChanges();
                     }
@@ -84,7 +82,7 @@ namespace ParkingApp.API.Controllers
                     {
                         return NotFound("There is not such a slot like this. Select another one.");
                     }
-                    return Ok(response);
+                    return Ok(result.Id);
                 }
             }
             else

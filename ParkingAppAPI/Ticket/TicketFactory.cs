@@ -24,15 +24,15 @@ namespace ParkingApp.API.Ticket
             var slot = _context.Slots.FirstOrDefault(s => s.Id == guid);
 
             //var file = File.Create("../ticket.pdf");
-            var writer = new PdfWriter("../ticket.pdf");
-            var pdfDocument = new PdfDocument(writer);
-            pdfDocument.SetTagged();
-            var document = new Document(pdfDocument);
-            document.Add(new Paragraph("ParkingAppAPI!"));
-            document.Add(new Paragraph("***************************"));
-            document.Add(new Paragraph($"Your parking slot coords is: X = {slot.PosX} Y = {slot.PosY}"));
-            document.Add(new Paragraph("Have a nice day!"));
-            document.Close();
+            //var writer = new PdfWriter("../ticket.pdf");
+            //var pdfDocument = new PdfDocument(writer);
+            //pdfDocument.SetTagged();
+            //var document = new Document(pdfDocument);
+            //document.Add(new Paragraph("ParkingAppAPI!"));
+            //document.Add(new Paragraph("***************************"));
+            //document.Add(new Paragraph($"Your parking slot coords is: X = {slot.PosX} Y = {slot.PosY}"));
+            //document.Add(new Paragraph("Have a nice day!"));
+            //document.Close();
 
             return "Check the project's root folder to get a ticket; 'ticket.pdf'";
         }
