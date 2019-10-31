@@ -21,10 +21,8 @@ namespace ParkingApp.API.Controllers
             _context = context;
         }
 
-        /// <summary>
-        /// GET: api/Slots
-        /// </summary>
-        /// <returns></returns>
+        // Get the View of all of the slots.
+        [Route("home")]
         [HttpGet(Name = "Gui")]
         public ViewResult Index()
         {
@@ -36,15 +34,15 @@ namespace ParkingApp.API.Controllers
             return View(slotsListViewModel);
         }
 
-        //// GET: api/Slots
-        //[Route("raw")]
-        //[HttpGet(Name = "GetSlots")]
-        //public ActionResult<IEnumerable<Slot>> Getslots()
-        //{
-        //    var returnList = _context.slots.ToList();
-        //    returnList.Sort();
-        //    return Ok(returnList);
-        //}
+        //// GET the JSON list of available slots
+        [Route("json")]
+        [HttpGet(Name = "GetSlots")]
+        public ActionResult<IEnumerable<Slot>> Getslots()
+        {
+            var returnList = _context.Slots.ToList();
+            returnList.Sort();
+            return Ok(returnList);
+        }
 
         // POST: api/Slots
         [HttpPost]
@@ -60,12 +58,12 @@ namespace ParkingApp.API.Controllers
             return CreatedAtAction("GetSlots", new { id = slot.Id }, slot);
         }
 
-        // PUT: api/Slots/0/0
-        [HttpPatch("{posX}/{posY}")]
-        public ActionResult UpdateSlot(int posX, int posY)
-        { 
-            var result = _context.Slots.FirstOrDefault(s => s.PosX == posX && s.PosY == posY);
-
+        //PATCH: api/slots/{guid}
+        [HttpPatch("{guid}")]
+        public ActionResult UpdateSlot(Guid guid)
+        {
+            var result = _context.Slots.FirstOrDefault(s => s.Id == guid);
+            string response;
             if (result != null)
             {
                 if (result.IsOccupied)
@@ -76,10 +74,9 @@ namespace ParkingApp.API.Controllers
                 }
                 else
                 {
-                    var response = _context.ticketFactory.GenerateTicket(posX, posY);
-
                     if (result != null)
                     {
+                        response = _context.ticketFactory.GenerateTicket(guid);
                         result.IsOccupied = true;
                         _context.SaveChanges();
                     }
@@ -96,19 +93,6 @@ namespace ParkingApp.API.Controllers
             }
         }
 
-        [HttpDelete("{posX}/{posY}")]
-        public ActionResult DeleteSlot(int posX, int posY)
-        {
-            var slot = _context.Slots.FirstOrDefault(s => s.PosX == posX && s.PosY == posY);
-
-            if (slot == null) return NotFound();
-
-            _context.Slots.Remove(slot);
-            _context.SaveChanges();
-
-            return Ok($"Succesfully deleted a slot: X = {posX} Y = {posY}");
-        }
-
         [HttpDelete("{guid}")]
         public ActionResult DeleteSlot(Guid guid)
         {
@@ -121,5 +105,56 @@ namespace ParkingApp.API.Controllers
 
             return Ok($"Succesfully deleted a slot with an ID: {guid}");
         }
+
+        
+
+        // PUT: api/Slots/0/0
+        //[HttpPatch("{posX}/{posY}")]
+        //public ActionResult UpdateSlot(int posX, int posY)
+        //{ 
+        //    var result = _context.Slots.FirstOrDefault(s => s.PosX == posX && s.PosY == posY);
+
+        //    if (result != null)
+        //    {
+        //        if (result.IsOccupied)
+        //        {
+        //            result.IsOccupied = false;
+        //            _context.SaveChanges();
+        //            return Ok("Have a nice day!");
+        //        }
+        //        else
+        //        {
+        //            var response = _context.ticketFactory.GenerateTicket(posX, posY);
+
+        //            if (result != null)
+        //            {
+        //                result.IsOccupied = true;
+        //                _context.SaveChanges();
+        //            }
+        //            else
+        //            {
+        //                return NotFound("There is not such a slot like this. Select another one.");
+        //            }
+        //            return Ok(response);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return NotFound("Such a slot doesn't exists!");
+        //    }
+        //}
+
+        //[HttpDelete("{posX}/{posY}")]
+        //public ActionResult DeleteSlot(int posX, int posY)
+        //{
+        //    var slot = _context.Slots.FirstOrDefault(s => s.PosX == posX && s.PosY == posY);
+
+        //    if (slot == null) return NotFound();
+
+        //    _context.Slots.Remove(slot);
+        //    _context.SaveChanges();
+
+        //    return Ok($"Succesfully deleted a slot: X = {posX} Y = {posY}");
+        //}
     }
 }

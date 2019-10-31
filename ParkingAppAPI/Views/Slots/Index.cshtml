@@ -7,7 +7,7 @@
     <div class="row">
         @foreach (var slot in Model.Slots)
         {
-            <button class="slot" onclick="changeColor()">@slot.IsOccupied</button>
+            <button class="slot" onclick="sendPut('@slot.Id')">@slot.IsOccupied</button>
         }
     </div>
 </div>

@@ -13,16 +13,7 @@
     }
 })();
 
-// funkcja poniżej nie działa...
-
-function changeColor()
+function sendPut(guid)
 {
-    if (this.InnerHtml === 'False') {
-        this.backgroundColor = 'red';
-        this.InnerHtml = 'True';
-    }
-    else {
-        this.backgroundColor = 'lawnGreen';
-        this.InnerHtml = 'False';
-    }
+    window.alert(guid);
 }

@@ -7,6 +7,6 @@ namespace ParkingApp.API.Ticket
 {
     public interface ITicketFactory
     {
-        public string GenerateTicket(int posX, int posY);
+        public string GenerateTicket(Guid guid);
     }
 }
