@@ -1,6 +1,25 @@
 ﻿'use_strict';
 attachColor();
 
+function sendPost() {
+    var request = new XMLHttpRequest();
+    var url = 'http://localhost:54790/api/Slots/';
+
+    request.open('POST', url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+            if (request.status == 201) {
+                console.log(request.responseText);
+            }
+            else {
+                console.log("Error while creating the slot");
+            }
+        }
+    }
+    request.send("{}");
+}
+
 function sendPut(guid) {
     var request = new XMLHttpRequest();
     var url = 'http://localhost:54790/api/Slots/' + guid;
@@ -16,7 +35,7 @@ function sendPut(guid) {
                 console.log("Error while loading the page.");
             }
         }
-    };
+    }
     request.send(null); 
 }
 
@@ -34,7 +53,6 @@ function sendDelete() {
                 console.log("Error while loading the page.")
             }
         }
-
     }
     request.send(null);
 }

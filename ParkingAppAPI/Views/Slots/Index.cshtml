@@ -5,7 +5,8 @@
 
 <div class="col-sm-4 col-lg-4 col-md-4" id="slotsContainer">
     <div>
-        <i class="fas fa-trash-alt" onclick="sendDelete()"></i>
+        <button class="deleteButton" onclick="sendDelete()"></button>
+        <button class="addButton" onclick="sendPost()"></button>
     </div>
     <div class="row">
         @foreach (var slot in Model.Slots)
