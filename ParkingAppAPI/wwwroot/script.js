@@ -25,7 +25,7 @@ function sendPut(guid) {
     var url = 'http://localhost:54790/api/Slots/' + guid;
 
     request.open('PATCH', url, true);
-    request.onreadystatechange = function (aEvt) {
+    request.onreadystatechange = function () {
         if (request.readyState == 4) {
             if (request.status == 200) {
                 console.log(request.responseText);
@@ -64,6 +64,8 @@ function changeColor(guid) {
         clicketButton.style.backgroundColor = '#800000';
         clicketButton.innerHTML = "True";
         console.log('Teraz guzik jest czerwony');
+
+        getTicket();
     }
     else {
         clicketButton.style.backgroundColor = '#009900';
@@ -83,3 +85,17 @@ function attachColor() {
         }
     }
 };
+
+function getTicket() {
+    var now = new Date();
+
+    var doc = new jsPDF();
+
+    doc.text('Welcome on our parking, you have paid for your stay till: \n' +
+        (now.getHours() + 3) + ':' + now.getMinutes() + ' of ' + now.getDate() + '/' + (now.getMonth() + 1) + '/' + now.getFullYear(), 10, 10);
+    doc.save('ticket.pdf');
+}
+
+function populateParking() {
+
+}
