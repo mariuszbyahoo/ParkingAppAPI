@@ -1,0 +1,38 @@
+﻿body {
+    background-color: aliceblue;
+}
+.slot {
+    border-radius: 5px;
+    width: 250px;
+    height: 250px;
+    font-size: 0;
+    margin: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteButton {
+    border-radius: 25px;
+    width: 35px;
+    height: 30px;
+    border: none;
+    background-color: red;
+    cursor: pointer;
+}
+
+    .deleteButton:hover {
+        background-color: lightcoral;
+    }
+
+.addButton {
+    border-radius: 25px;
+    width: 35px;
+    height: 30px;
+    background-color: dodgerblue;
+    border: none;
+    cursor: pointer;
+}
+
+    .addButton:hover {
+        background-color: skyblue;
+    }

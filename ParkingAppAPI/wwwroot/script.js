@@ -23,7 +23,7 @@ function sendPost() {
 function sendPut(guid) {
     var request = new XMLHttpRequest();
     var url = 'http://localhost:54790/api/Slots/' + guid;
-    var emptyDataString = "";
+
     request.open('PATCH', url, true);
     request.onreadystatechange = function (aEvt) {
         if (request.readyState == 4) {

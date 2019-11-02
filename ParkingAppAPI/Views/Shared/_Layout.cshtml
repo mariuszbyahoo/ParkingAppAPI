@@ -7,42 +7,12 @@
     <meta http-equiv="X-UA-Compatible" />
     <meta name="viewport" content="width=device-width" , initial-scale="1" />
     <script src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" data-mutate-approach="sync"></script>
-    <style>
-        .slot {
-            width: 250px;
-            height: 250px;
-            font-size: 0;
-            margin: 2px;
-            cursor: pointer;
-        }
-        .deleteButton {
-            width: 35px;
-            height: 30px;
-            background-color: lightcoral;
-        }
-        .deleteButton:hover{
-            background-color: red;
-        }
-        .addButton {
-            width: 35px;
-            height: 30px;
-            background-color: dodgerblue;
-        }
-        .addButton:hover {
-            background-color: skyblue;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <h1 class="header">Mój Turbo Parking!</h1>
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <p class="lead">
-                    <img class="img-fluid" alt="Mój turbo parking!" src="~/img/logo.jpg" />
-                </p>
-            </div>
             <div class="col-md-9">
                 @RenderBody()
             </div>

@@ -1,12 +1,12 @@
 ﻿@model SlotsListViewModel
-
-<h1 class="font-italic">Choose your parking slot:</h1>
-<p> We've got: @Model.Slots.Count() slots</p>
+<div class="border-info">
+    <p>@Model.Slots.Count()</p>
+</div>
 
 <div class="col-sm-4 col-lg-4 col-md-4" id="slotsContainer">
     <div>
-        <button class="deleteButton" onclick="sendDelete()"></button>
-        <button class="addButton" onclick="sendPost()"></button>
+        <button class="deleteButton" onclick="sendDelete()"><i class="fas fa-trash-alt"></i></button>
+        <button class="addButton" onclick="sendPost()"><i class="fas fa-plus"></i></button>
     </div>
     <div class="row">
         @foreach (var slot in Model.Slots)
