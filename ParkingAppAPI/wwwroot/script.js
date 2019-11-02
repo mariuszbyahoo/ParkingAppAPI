@@ -61,14 +61,14 @@ function changeColor(guid) {
     var clicketButton = document.getElementById(guid);
 
     if (clicketButton.innerHTML == 'False') {
-        clicketButton.style.backgroundColor = 'red';
+        clicketButton.style.backgroundColor = '#800000';
         clicketButton.innerHTML = "True";
         console.log('Teraz guzik jest czerwony');
     }
     else {
-        clicketButton.style.backgroundColor = 'lawnGreen';
+        clicketButton.style.backgroundColor = '#009900';
         clicketButton.innerHTML = "False";
-        console.log('I z powrotem zielony')
+        console.log('I z powrotem zielony');
     }
 
 }
@@ -76,10 +76,10 @@ function changeColor(guid) {
 function attachColor() {
     for (let i = 0; i < document.getElementsByClassName('slot').length; i++) {
         if (document.getElementsByClassName('slot').item(i).innerHTML === 'False') {
-            document.getElementsByClassName('slot').item(i).style.backgroundColor = 'lawnGreen';
+            document.getElementsByClassName('slot').item(i).style.backgroundColor = '#009900'; // green
         }
         else {
-            document.getElementsByClassName('slot').item(i).style.backgroundColor = 'red';
+            document.getElementsByClassName('slot').item(i).style.backgroundColor = '#800000'; // red
         }
     }
 };

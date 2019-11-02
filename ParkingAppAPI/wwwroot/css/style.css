@@ -2,37 +2,68 @@
     background-color: aliceblue;
 }
 .slot {
-    border-radius: 5px;
     width: 250px;
     height: 250px;
     font-size: 0;
     margin: 2px;
     border: none;
     cursor: pointer;
+    border-radius: 1% 1% 1% 1% / 1% 1% 1% 1%;
+    transition: all .4s ;
+    background-color: #009900
+
+}
+.slot:hover {
+    border-radius: 10% 10% 10% 10% ;
+    box-shadow: 10px 10px rgba(0,0,0,.25);
 }
 
 .deleteButton {
     border-radius: 25px;
-    width: 35px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border: none;
     background-color: red;
     cursor: pointer;
+    box-shadow: 2px 2px rgba(0,0,0,.15);
+    float: right;
+    margin-right: 30px;
+    position: relative;
+    transition: all .4s;
 }
 
-    .deleteButton:hover {
-        background-color: lightcoral;
-    }
+.deleteButton:hover {
+    background-color: lightcoral;
+}
 
 .addButton {
     border-radius: 25px;
-    width: 35px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     background-color: dodgerblue;
     border: none;
     cursor: pointer;
+    box-shadow: 2px 2px rgba(0,0,0,.15);
+    float: right;
+    margin-right: 30px;
+    position: relative;
+    transition: all .4s;
+}
+.addButton:hover {
+    background-color: skyblue;
+}
+#tv {
+    position: relative;
+    width: 350px;
+    height: 550px;
+    background: white;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+    color: white;
+    box-shadow: 20px 20px rgba(0,0,0,.15);
+    transition: all .4s ease;
 }
 
-    .addButton:hover {
-        background-color: skyblue;
-    }
+#tv:hover {
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5%;
+    box-shadow: 10px 10px rgba(0,0,0,.25);
+}
