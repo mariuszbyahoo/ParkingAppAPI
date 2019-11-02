@@ -10,7 +10,7 @@ function sendPut(guid) {
         if (request.readyState == 4) {
             if (request.status == 200) {
                 console.log(request.responseText);
-                changeColor(guid); // Jak tu wrzucić ten przycisk?
+                changeColor(guid); 
             }
             else {
                 console.log("Error while loading the page.");
@@ -20,9 +20,27 @@ function sendPut(guid) {
     request.send(null); 
 }
 
+function sendDelete() {
+    var request = new XMLHttpRequest();
+    var url = 'http://localhost:54790/api/Slots/random';
+
+    request.open('DELETE', url, true);
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                console.log(request.responseText);
+            }
+            else {
+                console.log("Error while loading the page.")
+            }
+        }
+
+    }
+    request.send(null);
+}
+
 function changeColor(guid) {
     var clicketButton = document.getElementById(guid);
-    // On tu nie wie co to event.target
 
     if (clicketButton.innerHTML == 'False') {
         clicketButton.style.backgroundColor = 'red';

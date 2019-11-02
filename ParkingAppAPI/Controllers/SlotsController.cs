@@ -104,6 +104,19 @@ namespace ParkingApp.API.Controllers
             return Ok($"Succesfully deleted a slot with an ID: {guid}");
         }
 
+        [HttpDelete("random")]
+        public ActionResult DeleteRandomSlot()
+        {
+            var slot = _context.Slots.FirstOrDefault();
+
+            if (slot == null) return NotFound();
+
+            _context.Slots.Remove(slot);
+            _context.SaveChanges();
+
+            return Ok($"Succesfully deleted a slot with an ID: {slot.Id}");
+        }
+
         
 
         // PUT: api/Slots/0/0
