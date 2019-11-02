@@ -48,8 +48,6 @@ namespace ParkingApp.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Slot>> PostSlot(Slot slot)
         {
-            if (_context.Slots.Any(s => s.PosX == slot.PosX && s.PosY == slot.PosY))
-                return BadRequest("Such a slot exists!");
 
             _context.Slots.Add(slot);
             
