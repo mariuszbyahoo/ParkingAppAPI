@@ -1,5 +1,8 @@
 ﻿'use_strict';
 attachColor();
+let slotsData = "http://localhost:54790/api/slots/json";
+let row = document.getElementById('row');
+
 
 function sendPost() {
     var request = new XMLHttpRequest();
@@ -18,6 +21,7 @@ function sendPost() {
         }
     }
     request.send("{}");
+    setTimeout(function () { window.alert('Added a slot'); window.location.reload() }, 100);
 }
 
 function sendPut(guid) {
@@ -55,6 +59,8 @@ function sendDelete() {
         }
     }
     request.send(null);
+    setTimeout(function () { window.alert('Slot deleted'); window.location.reload() }, 100);
+
 }
 
 function changeColor(guid) {
@@ -72,7 +78,6 @@ function changeColor(guid) {
         clicketButton.innerHTML = "False";
         console.log('I z powrotem zielony');
     }
-
 }
 
 function attachColor() {
@@ -96,6 +101,3 @@ function getTicket() {
     doc.save('ticket.pdf');
 }
 
-function populateParking() {
-
-}
