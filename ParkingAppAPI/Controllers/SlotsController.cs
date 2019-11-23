@@ -57,12 +57,14 @@ namespace ParkingApp.API.Controllers
         }
 
         //PATCH: api/slots/{guid}
-        [HttpPatch("{guid}")]
+        [HttpPut("{guid}")]
         public ActionResult UpdateSlot(Guid guid)
         {
             var result = _context.Slots.FirstOrDefault(s => s.Id == guid);
             if (result != null)
             {
+                result.Id = guid;
+
                 if (result.IsOccupied)
                 {
                     result.IsOccupied = false;

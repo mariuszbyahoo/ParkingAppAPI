@@ -30,7 +30,8 @@ namespace ParkingApp.API
                     {
                         builder.AllowAnyOrigin();
                         builder.AllowAnyHeader();
-                    });
+                        builder.AllowAnyMethod();
+                   });
             });
             services.AddDbContextPool<SlotContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("SlotDb"))); // @"Server=(localdb)\mssqllocaldb;Database=SlotDb;Trusted_Connection=True;"
