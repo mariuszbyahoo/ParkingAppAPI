@@ -18,9 +18,20 @@ namespace ParkingApp.API
 
         public IConfiguration Configuration { get; }
 
+        readonly string MyAllowAnyOrigins = "_myAllowSpecificOrigins";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowAnyOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyHeader();
+                    });
+            });
             services.AddDbContextPool<SlotContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("SlotDb"))); // @"Server=(localdb)\mssqllocaldb;Database=SlotDb;Trusted_Connection=True;"
             services.AddControllersWithViews();
@@ -33,6 +44,8 @@ namespace ParkingApp.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(MyAllowAnyOrigins);
 
             app.UseStaticFiles();
 
