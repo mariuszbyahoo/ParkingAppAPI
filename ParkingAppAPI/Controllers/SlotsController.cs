@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ParkingApp.API.Models;
+using ParkingApp.API.Ticket;
 using ParkingApp.API.ViewModel;
 
 namespace ParkingApp.API.Controllers
@@ -46,9 +47,9 @@ namespace ParkingApp.API.Controllers
 
         // POST: api/Slots
         [HttpPost]
-        public async Task<ActionResult<Slot>> PostSlot(Slot slot)
+        public async Task<ActionResult<Slot>> PostSlot()
         {
-
+            Slot slot = new Slot();
             _context.Slots.Add(slot);
             
             await _context.SaveChangesAsync();
@@ -56,7 +57,6 @@ namespace ParkingApp.API.Controllers
             return CreatedAtAction("GetSlots", new { id = slot.Id }, slot);
         }
 
-        //PATCH: api/slots/{guid}
         [HttpPut("{guid}")]
         public ActionResult UpdateSlot(Guid guid)
         {
@@ -69,7 +69,7 @@ namespace ParkingApp.API.Controllers
                 {
                     result.IsOccupied = false;
                     _context.SaveChanges();
-                    return Ok(result.Id);
+                    return Ok($"Succesfully Changed a slot: {guid}");
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace ParkingApp.API.Controllers
                     {
                         return NotFound("There is not such a slot like this. Select another one.");
                     }
-                    return Ok(result.Id);
+                    return Ok($"Succesfully occupied a slot: {guid}");
                 }
             }
             else
